@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PhysicsLab by Mostafa Ahmed</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@500;700&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+:root{--bg:#f2f6f8;--fg:#12202e;--mut:#55677a;--card:#fff;--acc:#00838f;--acc2:#d97706;--line:#cfdbe3;--side:#12202e;--sidefg:#cfe3ee}
+@media(prefers-color-scheme:dark){:root{--bg:#0b161d;--fg:#e3eef4;--mut:#8fa6b6;--card:#112029;--acc:#3ddc97;--acc2:#ffb454;--line:#22394a;--side:#07101a;--sidefg:#a9c4d4}}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.6 "IBM Plex Sans",system-ui,sans-serif;background:var(--bg);color:var(--fg);display:flex;min-height:100vh}
+h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.2;margin:0 0 .5em}
+h1{font-size:clamp(2.2rem,5vw,3.6rem)}h2{font-size:2rem}h3{font-size:1.35rem}
+nav{width:230px;flex:none;background:var(--side);padding:22px 14px;position:sticky;top:0;height:100vh;overflow:auto}
+nav b{display:block;color:#fff;font:700 1.2rem "Source Serif 4",serif;padding:0 10px 16px}
+nav a{display:block;color:var(--sidefg);text-decoration:none;padding:7px 10px;border-radius:6px;border-left:3px solid transparent}
+nav a:hover{background:#ffffff14}nav a.on{border-left-color:var(--acc);color:#fff;background:#ffffff1a}
+main{flex:1;min-width:0;padding:32px clamp(16px,4vw,56px) 60px;max-width:1000px}
+section[hidden]{display:none}
+a{color:var(--acc)}a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--acc2);outline-offset:2px}
+.mut{color:var(--mut)}
+.hero{position:relative;border:1px solid var(--line);border-radius:10px;padding:clamp(20px,4vw,44px);overflow:hidden;background:var(--card)}
+.hero canvas{position:absolute;right:0;top:0;width:55%;height:100%;opacity:.55}
+.hero>*:not(canvas){position:relative;max-width:30rem}
+.btn{display:inline-block;margin:6px 8px 0 0;padding:8px 16px;border-radius:6px;background:var(--acc);color:var(--bg);text-decoration:none;font-weight:500}
+.btn.o{background:none;border:1px solid var(--acc);color:var(--acc)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin:18px 0}
+.card{border:1px solid var(--line);border-radius:8px;padding:16px;background:var(--card)}
+.card h3{font-size:1.1rem}.card p{margin:.3em 0}
+.exp{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:20px;margin:0 0 28px}
+.lab{display:grid;grid-template-columns:230px 1fr;gap:18px;margin:14px 0}
+.ctl label{display:block;margin-bottom:12px;font-size:.92rem}
+.ctl output{float:right;color:var(--acc);font-weight:500}
+.ctl input,.ctl select{width:100%;accent-color:var(--acc)}.ctl select{padding:4px;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:4px}
+canvas.vw,canvas.gr{width:100%;display:block;border:1px solid var(--line);border-radius:6px;margin-bottom:8px;background:var(--bg)}
+.info{font-size:.92rem;color:var(--acc2);margin:0;min-height:2.6em}
+details{border-top:1px solid var(--line);padding:8px 0}summary{cursor:pointer;font-weight:500}
+pre{background:var(--bg);border:1px solid var(--line);padding:12px;border-radius:6px;overflow:auto;font-size:.82rem;line-height:1.45}
+li{margin:.25em 0}
+@media(max-width:820px){body{display:block}nav{width:auto;height:auto;position:static;display:flex;flex-wrap:wrap;gap:2px}nav b{width:100%}.lab{grid-template-columns:1fr}.hero canvas{width:100%;opacity:.25}}
+</style>
+</head>
+<body>
+<nav id="nav">
+<b>PhysicsLab</b>
+<a href="#home">Home</a><a href="#experiments">Experiments</a><a href="#mechanics">Mechanics</a><a href="#electricity">Electricity</a><a href="#thermal">Thermal Physics</a><a href="#modern">Modern Physics</a><a href="#matlab">MATLAB Projects</a><a href="#about">About Me</a><a href="#cv">Academic CV</a>
+</nav>
+<main>
+
+<section id="home">
+<div class="hero">
+<canvas id="osc" width="600" height="400"></canvas>
+<h1>PhysicsLab</h1>
+<p><b>Mostafa Ahmed</b> · Physics Teaching Assistant</p>
+<p class="mut">Interactive simulations, worked theory and lab procedures that I use to teach mechanics, electricity, thermal and modern physics. Change a parameter and watch the graph respond.</p>
+<a class="btn" href="#experiments">Open the experiments</a><a class="btn o" href="#cv">Academic CV</a>
+</div>
+<div class="grid">
+<div class="card"><h3>Learn by changing things</h3><p class="mut">Every experiment has sliders for its physical parameters and a live graph.</p></div>
+<div class="card"><h3>Theory beside practice</h3><p class="mut">Each simulation comes with the governing equations and a step-by-step lab procedure.</p></div>
+<div class="card"><h3>Numerical methods</h3><p class="mut">MATLAB projects show how the same models are solved and fitted in code.</p></div>
+</div>
+</section>
+
+<section id="experiments" hidden>
+<h2>Experiments</h2>
+<p class="mut">Six interactive simulations grouped by topic. Select one to open it.</p>
+<div class="grid" id="hub"></div>
+</section>
+
+<section id="mechanics" hidden><h2>Mechanics</h2><p class="mut">Pendulum motion, oscillations and damping.</p><div class="slot"></div></section>
+<section id="electricity" hidden><h2>Electricity</h2><p class="mut">RC circuits and electrical measurements.</p><div class="slot"></div></section>
+<section id="thermal" hidden><h2>Thermal Physics</h2><p class="mut">Specific heat capacity by electrical heating.</p><div class="slot"></div></section>
+<section id="modern" hidden><h2>Modern Physics</h2><p class="mut">The photoelectric effect and semiconductor energy bands.</p><div class="slot"></div></section>
+
+<section id="matlab" hidden>
+<h2>MATLAB Projects</h2>
+<p class="mut">Numerical simulations that mirror the experiments above. Replace the links with your repository folders.</p>
+<div class="card"><h3>Nonlinear pendulum with ode45</h3><pre>g = 9.81; L = 1; b = 0.05;
+f = @(t,y) [y(2); -(g/L)*sin(y(1)) - b*y(2)];
+[t,y] = ode45(f, [0 12], [pi/6; 0]);
+plot(t, rad2deg(y(:,1))); xlabel('t (s)'); ylabel('\theta (deg)');</pre><a href="https://github.com/YOUR-USERNAME/physicslab/tree/main/matlab/pendulum">View on GitHub</a></div>
+<div class="card" style="margin-top:14px"><h3>RC discharge: fit the time constant</h3><pre>t = data(:,1); V = data(:,2);
+p = polyfit(t, log(V), 1);          % ln V = ln V0 - t/tau
+tau = -1/p(1);
+fprintf('tau = %.3f s\n', tau);</pre><a href="https://github.com/YOUR-USERNAME/physicslab/tree/main/matlab/rc">View on GitHub</a></div>
+<div class="card" style="margin-top:14px"><h3>Planck constant from stopping potential</h3><pre>e = 1.602e-19;
+p = polyfit(f, Vs, 1);              % eVs = hf - phi
+h = p(1)*e;
+fprintf('h = %.3e J s\n', h);</pre><a href="https://github.com/YOUR-USERNAME/physicslab/tree/main/matlab/planck">View on GitHub</a></div>
+</section>
+
+<section id="about" hidden>
+<h2>About Me</h2>
+<p>I am a Physics Teaching Assistant at [your university / faculty]. I run laboratory sessions and tutorials for [courses], helping students connect equations to measurements.</p>
+<div class="grid">
+<div class="card"><h3>Teaching</h3><ul><li>Lab supervision and report marking</li><li>Problem-solving tutorials</li><li>Office hours and exam support</li></ul></div>
+<div class="card"><h3>Approach</h3><ul><li>Start from a measurement</li><li>Predict, then simulate, then test</li><li>Check units and error bars</li></ul></div>
+<div class="card"><h3>Tools</h3><ul><li>MATLAB and Python</li><li>Data analysis and curve fitting</li><li>Interactive web simulations</li></ul></div>
+</div>
+</section>
+
+<section id="cv" hidden>
+<h2>Academic CV</h2>
+<p class="mut">Fill in the bracketed fields with your own details.</p>
+<div class="card"><h3>Education</h3><p>[Degree], Physics, [University], [Year]</p></div>
+<div class="card" style="margin-top:14px"><h3>Teaching experience</h3><p>Physics Teaching Assistant, [Department], [Dates]. Courses: [list].</p></div>
+<div class="card" style="margin-top:14px"><h3>Research experience</h3><p>[Project title], supervised by [name], [Dates].</p></div>
+<div class="card" style="margin-top:14px"><h3>Skills and contact</h3><p>MATLAB, Python, laboratory instrumentation, data analysis.<br>Email: [your email] · GitHub: <a href="https://github.com/YOUR-USERNAME">YOUR-USERNAME</a></p></div>
+<a class="btn" href="cv.pdf">Download CV (PDF)</a>
+</section>
+
+</main>
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim(),fx=v=>+(+v).toPrecision(3);
+
+function plot(cv,S,xl,yl,o={}){
+ const c=cv.getContext('2d'),W=cv.width,H=cv.height,L=58,R=14,T=14,B=42,mut=css('--mut'),ln=css('--line'),cols=[css('--acc'),css('--acc2')];
+ c.clearRect(0,0,W,H);
+ const xs=S.flatMap(s=>s.x),ys=S.flatMap(s=>s.y);
+ let x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+ if(o.z)y0=Math.min(0,y0); if(y0==y1){y0-=1;y1+=1}
+ const X=x=>L+(x-x0)/(x1-x0)*(W-L-R),Y=y=>H-B-(y-y0)/(y1-y0)*(H-B-T);
+ c.font='12px sans-serif';c.fillStyle=mut;c.strokeStyle=ln;c.lineWidth=1;
+ for(let i=0;i<=5;i++){
+  const gx=x0+(x1-x0)*i/5,gy=y0+(y1-y0)*i/5;
+  c.beginPath();c.moveTo(X(gx),T);c.lineTo(X(gx),H-B);c.moveTo(L,Y(gy));c.lineTo(W-R,Y(gy));c.stroke();
+  c.textAlign='center';c.fillText(fx(gx),X(gx),H-B+16);c.textAlign='right';c.fillText(fx(gy),L-6,Y(gy)+4);
+ }
+ c.textAlign='center';c.fillText(xl,(L+W-R)/2,H-6);
+ c.save();c.translate(14,(T+H-B)/2);c.rotate(-Math.PI/2);c.fillText(yl,0,0);c.restore();
+ S.forEach((s,k)=>{
+  c.strokeStyle=cols[k%2];c.lineWidth=2;c.setLineDash(s.d?[6,4]:[]);c.beginPath();
+  s.x.forEach((x,i)=>i?c.lineTo(X(x),Y(s.y[i])):c.moveTo(X(x),Y(s.y[i])));c.stroke();
+  c.setLineDash([]);c.fillStyle=cols[k%2];c.textAlign='right';c.fillText(s.n,W-R-8,T+16+k*16);
+ });
+ if(o.pt){c.fillStyle=css('--fg');c.beginPath();c.arc(X(o.pt[0]),Y(o.pt[1]),5,0,7);c.fill()}
+}
+const ln=(c,a,b,d,e)=>{c.beginPath();c.moveTo(a,b);c.lineTo(d,e);c.stroke()};
+const dot=(c,x,y,r,f)=>{c.fillStyle=f;c.beginPath();c.arc(x,y,r,0,7);c.fill()};
+
+const E=[
+{id:'pendulum',sec:'mechanics',t:'Simple pendulum with damping',vh:200,
+ intro:'Compare the full nonlinear solution with the small-angle approximation. Raise the starting angle to see the period lengthen.',
+ P:[{k:'L',l:'Length L (m)',a:.2,b:3,v:1,s:.05},{k:'th',l:'Initial angle θ₀ (°)',a:1,b:170,v:30,s:1},{k:'g',l:'Gravity g (m/s²)',a:1.6,b:25,v:9.81,s:.01},{k:'b',l:'Damping b (1/s)',a:0,b:1,v:.05,s:.01}],
+ run(p){
+  const dt=.005,N=2400,w0=Math.sqrt(p.g/p.L),a0=p.th*Math.PI/180,raw=[],x=[],y=[],y2=[];let a=a0,w=0;
+  for(let i=0;i<N;i++){if(i%8==0){x.push(i*dt);y.push(a*57.2958);y2.push(p.th*Math.cos(w0*i*dt)*Math.exp(-p.b*i*dt/2))}
+   raw.push(a);w+=(-w0*w0*Math.sin(a)-p.b*w)*dt;a+=w*dt}
+  const T0=2*Math.PI/w0,T=T0*(1+a0*a0/16+11*a0**4/3072);
+  return{S:[{n:'nonlinear (numerical)',x,y},{n:'small-angle approximation',x,y:y2,d:1}],xl:'t (s)',yl:'θ (deg)',
+   info:`T₀ = ${fx(T0)} s (small angle). T ≈ ${fx(T)} s at θ₀ = ${p.th}°.`,
+   view(c,t){const i=Math.floor((t%12)/dt)%N,len=40+p.L/3*130,bx=320+len*Math.sin(raw[i]),by=14+len*Math.cos(raw[i]);
+    c.strokeStyle=css('--fg');c.lineWidth=2;ln(c,260,12,380,12);ln(c,320,12,bx,by);dot(c,bx,by,13,css('--acc2'))}}},
+ th:'<p>For a pendulum of length L with damping b: θ″ + bθ′ + (g/L) sin θ = 0.</p><p>For small angles sin θ ≈ θ, so ω₀ = √(g/L) and T₀ = 2π√(L/g). The amplitude decays as e<sup>−bt/2</sup>. At finite amplitude T ≈ T₀(1 + θ₀²/16 + …), so large swings take longer.</p>',
+ pr:['Hang a bob on a light string and measure L from the pivot to the bob centre.','Release from a small angle (below 10°) and time 20 oscillations with a stopwatch.','Divide by 20 to get T. Repeat three times and average.','Repeat for five lengths. Plot T² against L; the slope is 4π²/g.','Compare with the simulation using the same L and θ₀.']},
+
+{id:'rc',sec:'electricity',t:'RC circuit: charging and discharging',vh:120,
+ intro:'Watch the capacitor voltage follow an exponential curve controlled by the time constant τ = RC.',
+ P:[{k:'V',l:'Supply V (V)',a:1,b:24,v:5,s:.5},{k:'R',l:'Resistance R (kΩ)',a:1,b:100,v:10,s:1},{k:'C',l:'Capacitance C (µF)',a:1,b:1000,v:100,s:1},{k:'m',l:'Mode',sel:[['Charging','c'],['Discharging','d']],v:'c'}],
+ run(p){
+  const tau=p.R*1e3*p.C*1e-6,vc=t=>p.m=='c'?p.V*(1-Math.exp(-t/tau)):p.V*Math.exp(-t/tau),x=[],a=[],b=[];
+  for(let i=0;i<=200;i++){const t=i/200*5*tau;x.push(t);a.push(vc(t));b.push(p.m=='c'?p.V-vc(t):vc(t))}
+  return{S:[{n:'capacitor V_C',x,y:a},{n:'resistor V_R',x,y:b,d:1}],xl:'t (s)',yl:'voltage (V)',
+   info:`τ = ${fx(tau)} s. Initial current I₀ = ${fx(p.V/p.R)} mA. Stored energy at full charge = ${fx(.5*p.C*1e-6*p.V*p.V*1e3)} mJ.`,
+   view(c,t){const u=(t%6)/6*5*tau,v=vc(u);c.strokeStyle=css('--fg');c.lineWidth=2;c.strokeRect(160,30,320,44);
+    c.fillStyle=css('--acc');c.fillRect(160,30,320*v/p.V,44);c.fillStyle=css('--fg');c.font='14px sans-serif';c.textAlign='center';
+    c.fillText(`V_C = ${fx(v)} V at t = ${fx(u)} s`,320,98)}}},
+ th:'<p>Charging: V_C(t) = V(1 − e<sup>−t/τ</sup>). Discharging: V_C(t) = V e<sup>−t/τ</sup>. The time constant is τ = RC, the time to reach 63% of the final value when charging or to fall to 37% when discharging.</p><p>Current: I = (V/R) e<sup>−t/τ</sup>. Energy stored: U = ½CV².</p>',
+ pr:['Connect a resistor, capacitor, switch and voltmeter in series with a DC supply.','Close the switch and record V_C every 5 s until it levels off.','Open the supply and short the circuit; record the discharge the same way.','Plot ln V_C against t for the discharge. The slope is −1/τ.','Compare τ from the graph with the product RC.']},
+
+{id:'heat',sec:'thermal',t:'Specific heat capacity by electrical heating',vh:150,
+ intro:'A heater of power P warms a metal block. The initial slope of the temperature curve gives c.',
+ P:[{k:'P',l:'Heater power P (W)',a:10,b:100,v:40,s:1},{k:'m',l:'Mass m (kg)',a:.05,b:1,v:.2,s:.01},{k:'c',l:'Material',sel:[['Aluminium (900)',900],['Iron (450)',450],['Copper (385)',385],['Water (4186)',4186]],v:900},{k:'k',l:'Heat loss k (W/K)',a:0,b:.5,v:.05,s:.01}],
+ run(p){
+  const T0=20,x=[],y=[],id=[];let T=T0;
+  for(let t=0;t<=600;t++){if(t%5==0){x.push(t);y.push(T);id.push(T0+p.P*t/(p.m*p.c))}T+=(p.P-p.k*(T-T0))/(p.m*p.c)}
+  const sl=(y[12]-y[0])/60,ce=p.P/(p.m*sl);
+  return{S:[{n:'with heat loss',x,y},{n:'ideal (no loss)',x,y:id,d:1}],xl:'t (s)',yl:'temperature (°C)',
+   info:`Slope over the first 60 s gives c ≈ ${fx(ce)} J/(kg·K); the true value is ${p.c}.${p.k>0?` Plateau at ${fx(T0+p.P/p.k)} °C.`:''}`,
+   view(c,t){const i=Math.floor((t%8)/8*(y.length-1)),f=Math.min(1,(y[i]-T0)/Math.max(1,y[y.length-1]-T0));
+    c.strokeStyle=css('--fg');c.lineWidth=2;c.strokeRect(120,40,400,36);c.fillStyle=css('--acc2');c.fillRect(120,40,400*f,36);
+    c.fillStyle=css('--fg');c.font='14px sans-serif';c.textAlign='center';c.fillText(`${fx(y[i])} °C`,320,110)}}},
+ th:'<p>Heat supplied: Q = Pt. Temperature rise: Q = mcΔT, so ΔT = Pt/(mc) and c = P/(m · slope).</p><p>With loss to the surroundings, m c dT/dt = P − k(T − T₀). The curve bends toward T₀ + P/k, so use only the initial slope for c.</p>',
+ pr:['Insert a heater and thermometer into a lagged metal block of known mass.','Record room temperature, then switch on the heater at a known power (V × I).','Read the temperature every 30 s for 10 minutes.','Plot T against t and take the slope of the initial straight section.','Calculate c = P/(m · slope) and compare with the tabulated value.']},
+
+{id:'photo',sec:'modern',t:'Photoelectric effect',vh:170,
+ intro:'Light ejects electrons only above a threshold frequency. Move the frequency slider past it.',
+ P:[{k:'f',l:'Frequency f (THz)',a:300,b:1600,v:900,s:10},{k:'w',l:'Metal (work function, eV)',sel:[['Caesium 2.1',2.1],['Sodium 2.28',2.28],['Zinc 4.3',4.3],['Copper 4.65',4.65],['Platinum 5.65',5.65]],v:2.28},{k:'I',l:'Intensity (%)',a:5,b:100,v:50,s:5}],
+ run(p){
+  const h=4.1357e-3,x=[],y=[];for(let f=300;f<=1600;f+=20){x.push(f);y.push(Math.max(0,h*f-p.w))}
+  const ke=Math.max(0,h*p.f-p.w);
+  return{S:[{n:'K_max vs f',x,y}],xl:'frequency (THz)',yl:'K_max (eV)',z:1,pt:[p.f,ke],
+   info:ke>0?`Photon energy ${fx(h*p.f)} eV. K_max = ${fx(ke)} eV, stopping potential ${fx(ke)} V. Threshold f₀ = ${fx(p.w/h)} THz.`:`Photon energy ${fx(h*p.f)} eV is below φ. No electrons are emitted. Threshold f₀ = ${fx(p.w/h)} THz.`,
+   view(c,t){c.fillStyle=css('--mut');c.fillRect(120,140,400,10);
+    for(let i=0;i<p.I/5;i++){const u=(t*.4+i*.137)%1,x0=140+i*(360/20);c.strokeStyle=css('--acc2');c.lineWidth=1.5;ln(c,x0-40*(1-u),10+110*u*0,x0,10+120*u);
+     if(ke>0){const v=(t*(.3+.15*Math.sqrt(ke))+i*.31)%1;dot(c,x0+20*v,136-110*v,3,css('--acc'))}}}}},
+ th:'<p>Einstein’s equation: K_max = hf − φ. Each photon has energy E = hf. If hf &lt; φ no electron is released, however intense the light.</p><p>Intensity changes the number of electrons (the current), not their maximum energy. Stopping potential: eV_s = hf − φ, so the slope of V_s against f equals h/e.</p>',
+ pr:['Illuminate a photocell with monochromatic light of known frequency.','Increase the retarding voltage until the photocurrent just reaches zero. This is V_s.','Repeat for at least five frequencies.','Plot V_s against f. The x-intercept is f₀ and the slope is h/e.','Calculate h and φ = h f₀. Estimate the uncertainty from the fit.']},
+
+{id:'band',sec:'modern',t:'Semiconductor energy bands',vh:170,
+ intro:'See how band gap, temperature and doping set the Fermi level and the intrinsic carrier density.',
+ P:[{k:'Eg',l:'Band gap E_g (eV)',a:.1,b:3.5,v:1.12,s:.01},{k:'T',l:'Temperature T (K)',a:100,b:800,v:300,s:5},{k:'d',l:'Doping',sel:[['Intrinsic',0],['n-type (donors)',1],['p-type (acceptors)',-1]],v:0}],
+ run(p){
+  const k=8.617e-5,ref=Math.exp(-1.12/(2*k*300)),ni=T=>1e10*Math.pow(T/300,1.5)*Math.exp(-p.Eg/(2*k*T))/ref,x=[],y=[];
+  for(let T=100;T<=800;T+=10){x.push(T);y.push(Math.log10(ni(T)))}
+  const n=ni(p.T),sh=Math.max(-p.Eg/2,Math.min(p.Eg/2,p.d*k*p.T*Math.log(1e16/n))),EF=p.Eg/2+sh;
+  return{S:[{n:'log₁₀ nᵢ (cm⁻³)',x,y}],xl:'temperature (K)',yl:'log₁₀ nᵢ',pt:[p.T,Math.log10(n)],
+   info:`nᵢ ≈ ${n.toExponential(2)} cm⁻³ (scaled to silicon = 1×10¹⁰ at 300 K). E_F is ${fx(EF)} eV above the valence band edge.`,
+   view(c,t){const gp=24+p.Eg/3.5*90,Y=E=>40+gp*(1-E/p.Eg);c.fillStyle=css('--acc');c.globalAlpha=.25;c.fillRect(120,6,400,34);c.fillRect(120,40+gp,400,34);c.globalAlpha=1;
+    c.strokeStyle=css('--fg');c.lineWidth=2;ln(c,120,40,520,40);ln(c,120,40+gp,520,40+gp);c.setLineDash([6,4]);c.strokeStyle=css('--acc2');ln(c,120,Y(EF),520,Y(EF));c.setLineDash([]);
+    c.fillStyle=css('--fg');c.font='13px sans-serif';c.textAlign='left';c.fillText('E_c',526,44);c.fillText('E_v',526,44+gp);c.fillStyle=css('--acc2');c.fillText('E_F',526,Y(EF)+4)}}},
+ th:'<p>Carriers in a semiconductor follow n<sub>i</sub> ∝ T<sup>3/2</sup> exp(−E<sub>g</sub>/2kT). A wider gap means exponentially fewer thermally excited electrons.</p><p>Doping moves the Fermi level: donors push E_F toward the conduction band (n-type), acceptors toward the valence band (p-type). Occupation follows f(E) = 1/(1 + e<sup>(E−E_F)/kT</sup>).</p>',
+ pr:['Mount a semiconductor sample (for example germanium) in a heater with a thermometer.','Measure its resistance R at 10 K steps from room temperature to about 380 K.','Plot ln(1/R) against 1/T.','The slope equals −E_g/2k in the intrinsic region.','Calculate E_g and compare with the accepted value.']}
+];
+
+E.forEach(e=>{
+ const p=e.p={};e.P.forEach(q=>p[q.k]=q.v);
+ const ctl=e.P.map(q=>q.sel?`<label>${q.l}<select data-k="${q.k}">${q.sel.map(o=>`<option value="${o[1]}"${o[1]==q.v?' selected':''}>${o[0]}</option>`).join('')}</select></label>`
+  :`<label>${q.l}<output>${q.v}</output><input type="range" min="${q.a}" max="${q.b}" step="${q.s}" value="${q.v}" data-k="${q.k}"></label>`).join('');
+ const el=e.el=document.createElement('article');el.className='exp';
+ el.innerHTML=`<h3>${e.t}</h3><p class="mut">${e.intro}</p><div class="lab"><div class="ctl">${ctl}</div><div><canvas class="vw" width="640" height="${e.vh}"></canvas><canvas class="gr" width="640" height="300"></canvas><p class="info"></p></div></div>
+ <details open><summary>Theory</summary>${e.th}</details><details><summary>Experimental procedure</summary><ol>${e.pr.map(s=>`<li>${s}</li>`).join('')}</ol></details>`;
+ el.addEventListener('input',ev=>{const i=ev.target,k=i.dataset.k;if(!k)return;p[k]=isNaN(+i.value)?i.value:+i.value;if(i.type=='range')i.previousElementSibling.textContent=i.value;upd(e)});
+ $('#'+e.sec+' .slot').append(el);
+ const card=document.createElement('a');card.className='card';card.href='#'+e.sec;card.style.cssText='text-decoration:none;color:inherit';
+ card.innerHTML=`<h3>${e.t}</h3><p class="mut">${e.intro}</p>`;$('#hub').append(card);
+});
+function upd(e){const r=e.r=e.run(e.p);plot($('.gr',e.el),r.S,r.xl,r.yl,r);$('.info',e.el).textContent=r.info}
+let cur='home';
+function go(){
+ cur=location.hash.slice(1)||'home';if(!$('#'+cur))cur='home';
+ $$('main>section').forEach(s=>s.hidden=s.id!=cur);$$('#nav a').forEach(a=>a.classList.toggle('on',a.hash=='#'+cur));
+ E.forEach(upd);window.scrollTo(0,0);
+}
+addEventListener('hashchange',go);
+matchMedia('(prefers-color-scheme:dark)').addEventListener('change',()=>E.forEach(upd));
+const osc=$('#osc').getContext('2d');
+function loop(ms){
+ const t=ms/1000;
+ E.forEach(e=>{if(e.sec==cur){const c=$('.vw',e.el).getContext('2d');c.clearRect(0,0,640,e.vh);e.r.view(c,t)}});
+ if(cur=='home'){osc.clearRect(0,0,600,400);osc.strokeStyle=css('--acc');osc.lineWidth=2;osc.beginPath();
+  for(let i=0;i<=600;i++){const s=i/600*6.283;const x=300+240*Math.sin(3*s+t*.6),y=200+150*Math.sin(2*s);i?osc.lineTo(x,y):osc.moveTo(x,y)}osc.stroke()}
+ requestAnimationFrame(loop);
+}
+if(matchMedia('(prefers-reduced-motion:reduce)').matches){window.requestAnimationFrame=f=>setTimeout(()=>f(0),1000)}
+go();requestAnimationFrame(loop);
+</script>
+</body>
+</html>
