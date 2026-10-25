@@ -38,13 +38,15 @@ canvas.vw,canvas.gr{width:100%;display:block;border:1px solid var(--line);border
 details{border-top:1px solid var(--line);padding:8px 0}summary{cursor:pointer;font-weight:500}
 pre{background:var(--bg);border:1px solid var(--line);padding:12px;border-radius:6px;overflow:auto;font-size:.82rem;line-height:1.45}
 li{margin:.25em 0}
+.tw{overflow-x:auto}.tb{border-collapse:collapse;width:100%;font-size:.9rem}.tb th,.tb td{border:1px solid var(--line);padding:4px 6px;text-align:left}.tb input{width:100%;min-width:70px;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:4px;padding:3px}
+.q{border-top:1px solid var(--line);padding:10px 0}.q button{display:block;width:100%;text-align:left;margin:4px 0;padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);font:inherit;cursor:pointer}.q button.ok{border-color:var(--acc);border-width:2px}.q button.bad{border-color:var(--acc2);border-style:dashed}.fb{color:var(--acc2);margin:.3em 0 0}
 @media(max-width:820px){body{display:block}nav{width:auto;height:auto;position:static;display:flex;flex-wrap:wrap;gap:2px}nav b{width:100%}.lab{grid-template-columns:1fr}.hero canvas{width:100%;opacity:.25}}
 </style>
 </head>
 <body>
 <nav id="nav">
 <b>PhysicsLab</b>
-<a href="#home">Home</a><a href="#experiments">Experiments</a><a href="#mechanics">Mechanics</a><a href="#electricity">Electricity</a><a href="#thermal">Thermal Physics</a><a href="#modern">Modern Physics</a><a href="#matlab">MATLAB Projects</a><a href="#about">About Me</a><a href="#cv">Academic CV</a>
+<a href="#home">Home</a><a href="#experiments">Experiments</a><a href="#mechanics">Mechanics</a><a href="#electricity">Electricity</a><a href="#thermal">Thermal Physics</a><a href="#optics">Optics</a><a href="#matter">Properties of Matter</a><a href="#modern">Modern Physics</a><a href="#matlab">MATLAB Projects</a><a href="#about">About Me</a><a href="#cv">Academic CV</a>
 </nav>
 <main>
 
@@ -65,13 +67,15 @@ li{margin:.25em 0}
 
 <section id="experiments" hidden>
 <h2>Experiments</h2>
-<p class="mut">Six interactive simulations grouped by topic. Select one to open it.</p>
+<p class="mut">Fourteen interactive simulations grouped by topic. Select one to open it.</p>
 <div class="grid" id="hub"></div>
 </section>
 
 <section id="mechanics" hidden><h2>Mechanics</h2><p class="mut">Pendulum motion, oscillations and damping.</p><div class="slot"></div></section>
 <section id="electricity" hidden><h2>Electricity</h2><p class="mut">RC circuits and electrical measurements.</p><div class="slot"></div></section>
 <section id="thermal" hidden><h2>Thermal Physics</h2><p class="mut">Specific heat capacity by electrical heating.</p><div class="slot"></div></section>
+<section id="optics" hidden><h2>Optics</h2><p class="mut">Diffraction and interference of light.</p><div class="slot"></div></section>
+<section id="matter" hidden><h2>Properties of Matter</h2><p class="mut">Elasticity, viscosity and surface tension.</p><div class="slot"></div></section>
 <section id="modern" hidden><h2>Modern Physics</h2><p class="mut">The photoelectric effect and semiconductor energy bands.</p><div class="slot"></div></section>
 
 <section id="matlab" hidden>
@@ -80,15 +84,15 @@ li{margin:.25em 0}
 <div class="card"><h3>Nonlinear pendulum with ode45</h3><pre>g = 9.81; L = 1; b = 0.05;
 f = @(t,y) [y(2); -(g/L)*sin(y(1)) - b*y(2)];
 [t,y] = ode45(f, [0 12], [pi/6; 0]);
-plot(t, rad2deg(y(:,1))); xlabel('t (s)'); ylabel('\theta (deg)');</pre><a href="https://github.com/YOUR-USERNAME/physicslab/tree/main/matlab/pendulum">View on GitHub</a></div>
+plot(t, rad2deg(y(:,1))); xlabel('t (s)'); ylabel('\theta (deg)');</pre><a href="https://github.com/MstafaAhmed/physics-lab">View on GitHub</a></div>
 <div class="card" style="margin-top:14px"><h3>RC discharge: fit the time constant</h3><pre>t = data(:,1); V = data(:,2);
 p = polyfit(t, log(V), 1);          % ln V = ln V0 - t/tau
 tau = -1/p(1);
-fprintf('tau = %.3f s\n', tau);</pre><a href="https://github.com/YOUR-USERNAME/physicslab/tree/main/matlab/rc">View on GitHub</a></div>
+fprintf('tau = %.3f s\n', tau);</pre><a href="https://github.com/MstafaAhmed/physics-lab">View on GitHub</a></div>
 <div class="card" style="margin-top:14px"><h3>Planck constant from stopping potential</h3><pre>e = 1.602e-19;
 p = polyfit(f, Vs, 1);              % eVs = hf - phi
 h = p(1)*e;
-fprintf('h = %.3e J s\n', h);</pre><a href="https://github.com/YOUR-USERNAME/physicslab/tree/main/matlab/planck">View on GitHub</a></div>
+fprintf('h = %.3e J s\n', h);</pre><a href="https://github.com/MstafaAhmed/physics-lab">View on GitHub</a></div>
 </section>
 
 <section id="about" hidden>
@@ -107,7 +111,7 @@ fprintf('h = %.3e J s\n', h);</pre><a href="https://github.com/YOUR-USERNAME/phy
 <div class="card"><h3>Education</h3><p>[Degree], Physics, [University], [Year]</p></div>
 <div class="card" style="margin-top:14px"><h3>Teaching experience</h3><p>Physics Teaching Assistant, [Department], [Dates]. Courses: [list].</p></div>
 <div class="card" style="margin-top:14px"><h3>Research experience</h3><p>[Project title], supervised by [name], [Dates].</p></div>
-<div class="card" style="margin-top:14px"><h3>Skills and contact</h3><p>MATLAB, Python, laboratory instrumentation, data analysis.<br>Email: [your email] · GitHub: <a href="https://github.com/YOUR-USERNAME">YOUR-USERNAME</a></p></div>
+<div class="card" style="margin-top:14px"><h3>Skills and contact</h3><p>MATLAB, Python, laboratory instrumentation, data analysis.<br>Email: [your email] · GitHub: <a href="https://github.com/MstafaAhmed">MstafaAhmed</a></p></div>
 <a class="btn" href="cv.pdf">Download CV (PDF)</a>
 </section>
 
@@ -141,6 +145,15 @@ function plot(cv,S,xl,yl,o={}){
 const ln=(c,a,b,d,e)=>{c.beginPath();c.moveTo(a,b);c.lineTo(d,e);c.stroke()};
 const dot=(c,x,y,r,f)=>{c.fillStyle=f;c.beginPath();c.arc(x,y,r,0,7);c.fill()};
 
+const MQ=[
+['If the wavelength of light is increased, the light passing through a single slit will be:',['More diffracted','Less diffracted','Equally diffracted','Not diffracted'],0,'Δy₁ = 2Dλ/a grows with λ, so the pattern spreads out more.'],
+['If the slit width is decreased, the light will be:',['More diffracted','Less diffracted','Equally diffracted','Not diffracted'],0,'Δy₁ is proportional to 1/a, so a narrower slit gives a wider pattern.'],
+['Light of wavelength λ passes through a slit of width 4λ. At what angle is the second minimum?',['60°','30°','90°','14.5°'],1,'a sin θ = 2λ gives sin θ = 2λ/4λ = 0.5, so θ = 30°. (14.5° is the first minimum.)'],
+['The screen distance D is doubled. The central maximum becomes:',['half as wide','the same width','twice as wide','four times as wide'],2,'Δy₁ = 2Dλ/a is proportional to D.'],
+['Dark fringes in single slit diffraction occur when a sin θ equals:',['(n + ½)λ','nλ, with n = 1, 2, 3…','nλ/2','2nλ'],1,'Minima occur at β = nπ, which is a sin θ = nλ.'],
+['Compared with the central maximum, the side maxima are:',['equally bright','much dimmer, fading further out','brighter','absent'],1,'The first side maximum has only about 4.7% of the central intensity.'],
+['Fraunhofer diffraction is observed when:',['the screen is far away, or a lens focuses parallel rays','the screen is touching the slit','white light is used','the slit is much wider than λ'],0,'Rays reaching the screen must be approximately parallel.']];
+const wl=w=>{let r=0,g=0,b=0;if(w<440){r=(440-w)/60;b=1}else if(w<490){g=(w-440)/50;b=1}else if(w<510){g=1;b=(510-w)/20}else if(w<580){r=(w-510)/70;g=1}else if(w<645){r=1;g=(645-w)/65}else r=1;const f=w<420?.3+.7*(w-400)/20:w>700?.3+.7*(750-w)/50:1;return[r,g,b].map(v=>Math.round(255*Math.pow(v*f,.8)))};
 const E=[
 {id:'pendulum',sec:'mechanics',t:'Simple pendulum with damping',vh:200,
  intro:'Compare the full nonlinear solution with the small-angle approximation. Raise the starting angle to see the period lengthen.',
@@ -186,6 +199,34 @@ const E=[
  th:'<p>Heat supplied: Q = Pt. Temperature rise: Q = mcΔT, so ΔT = Pt/(mc) and c = P/(m · slope).</p><p>With loss to the surroundings, m c dT/dt = P − k(T − T₀). The curve bends toward T₀ + P/k, so use only the initial slope for c.</p>',
  pr:['Insert a heater and thermometer into a lagged metal block of known mass.','Record room temperature, then switch on the heater at a known power (V × I).','Read the temperature every 30 s for 10 minutes.','Plot T against t and take the slope of the initial straight section.','Calculate c = P/(m · slope) and compare with the tabulated value.']},
 
+{id:'slit',sec:'optics',t:'Single slit diffraction',vh:130,
+ intro:'Laser light passing through a narrow slit spreads into bright and dark fringes. Narrow the slit and watch the central maximum widen.',
+ P:[{k:'w',l:'Wavelength λ (nm)',a:400,b:750,v:650,s:5},{k:'a',l:'Slit width a (µm)',a:20,b:500,v:100,s:5},{k:'D',l:'Screen distance D (m)',a:.5,b:3,v:1.5,s:.05}],
+ run(p){
+  const lam=p.w*1e-9,a=p.a*1e-6,y1=p.D*lam/a,ym=4*y1,sc=Y=>{const b=Math.PI*a*Y/Math.hypot(Y,p.D)/lam;return Math.abs(b)<1e-9?1:Math.sin(b)/b},x=[],y=[];
+  for(let i=0;i<=600;i++){const Y=-ym+2*ym*i/600;x.push(Y*1e3);y.push(sc(Y)**2)}
+  return{S:[{n:'I / I₀',x,y}],xl:'position on screen y (mm)',yl:'relative intensity',z:1,
+   info:`First minimum y₁ = ${fx(y1*1e3)} mm. Central maximum width Δy₁ = 2Dλ/a = ${fx(2*y1*1e3)} mm. Side maxima reach only about 4.7% of the centre.`,
+   view(c){const[R,G,B]=wl(p.w);c.fillStyle='#000';c.fillRect(0,0,640,130);
+    for(let X=0;X<640;X+=2){const I=Math.abs(sc((X-320)/300*ym));c.fillStyle=`rgb(${R*I|0},${G*I|0},${B*I|0})`;c.fillRect(X,10,2,80)}
+    c.strokeStyle='#fff';c.lineWidth=1.5;ln(c,245,104,395,104);ln(c,245,96,245,112);ln(c,395,96,395,112);
+    c.fillStyle='#fff';c.font='13px sans-serif';c.textAlign='center';c.fillText(`Δy₁ = ${fx(2*y1*1e3)} mm`,320,124)}}},
+ th:'<p>Light passing through a narrow slit spreads into the geometric shadow. By Huygens’s principle every point across the slit acts as a source of secondary wavelets, and these interfere. This experiment covers Fraunhofer diffraction, where the screen is far away (or a lens is used) so the rays are nearly parallel.</p><p>Intensity: I(θ) = I₀ (sin β / β)², with β = πa sin θ / λ.</p><p>Minima occur at β = nπ, so a sin θ = nλ (n = ±1, ±2, …). For small angles sin θ ≈ tan θ = y/D, giving y<sub>n</sub> = nDλ/a.</p><p>The central maximum has width Δy₁ = 2y₁ = 2Dλ/a, so the slit width is a = 2Dλ/Δy₁.</p>',
+ pr:['Place the slit screen in front of the laser and the observing screen more than 1 m away. Clamp every component.','Measure the distance D from the slit to the observing screen with a metre ruler.','Switch on the laser and align the beam through the first slit. Note that the central maximum is brightest and the other maxima fade with distance.','Measure the width of the central maximum Δy₁: the distance between the first minima on either side, using a millimetre ruler.','Calculate the slit width from a = 2Dλ/Δy₁.','Repeat steps 3 to 5 for the second, third and fourth slits.','Estimate the percentage error Δa/a for each slit.'],
+ ex:`<details><summary>Apparatus</summary><p>Single slits of different widths, laser source, optical bench, observing screen, millimetre ruler, metre ruler.</p></details>
+ <details><summary>Results table: calculate your slit widths</summary><p class="mut">Uses λ and D from the sliders above, so set them to your lab values first. Enter the measured Δy₁ and the stated slit width.</p>
+ <div class="tw"><table class="tb"><tr><th>Slit</th><th>Δy₁ (mm)</th><th>a = 2Dλ/Δy₁ (mm)</th><th>Stated a (mm)</th><th>Error Δa/a (%)</th></tr>${[1,2,3,4].map(n=>`<tr><td>${n}</td><td><input type="number" step="any" min="0"></td><td>–</td><td><input type="number" step="any" min="0"></td><td>–</td></tr>`).join('')}</table></div></details>
+ <details><summary>Pre-lab questions</summary><ol>
+ <li>Describe the change in the width of the central maximum as the slit is made narrower.<details><summary>Answer</summary>Δy₁ = 2Dλ/a is inversely proportional to a, so the central maximum becomes wider as the slit narrows.</details></li>
+ <li>A screen is 100 cm from a single slit lit by 690 nm light. The central maximum is 3 mm wide. What is the slit width?<details><summary>Answer</summary>a = 2Dλ/Δy₁ = 2(1.00 m)(690 × 10⁻⁹ m)/(3 × 10⁻³ m) = 4.6 × 10⁻⁴ m = 0.46 mm. Check it above: set λ = 690 nm, D = 1 m, a = 460 µm and read Δy₁.</details></li></ol></details>
+ <details open><summary>Test yourself: multiple choice</summary>${MQ.map((m,n)=>`<div class="q"><b>${n+1}. ${m[0]}</b>${m[1].map((o,i)=>`<button data-i="${i}">${o}</button>`).join('')}<p class="fb"></p></div>`).join('')}</details>`,
+ init(e){
+  const el=e.el,calc=()=>$$('.tb tr',el).slice(1).forEach(r=>{const[i1,i2]=$$('input',r),t=$$('td',r),dy=+i1.value,st=+i2.value;
+   const a=dy>0?2*e.p.D*e.p.w*1e-3/dy:0;t[2].textContent=a?fx(a):'–';t[4].textContent=a&&st>0?fx(Math.abs(a-st)/st*100):'–'});
+  el.addEventListener('input',calc);
+  el.addEventListener('click',ev=>{const b=ev.target.closest('.q button');if(!b)return;const q=b.parentNode,m=MQ[$$('.q',el).indexOf(q)],ok=+b.dataset.i==m[2];
+   b.classList.add(ok?'ok':'bad');if(ok)$$('button',q).forEach(x=>x.disabled=true);$('.fb',q).textContent=ok?'Correct. '+m[3]:'Not quite. Try again.'})}},
+
 {id:'photo',sec:'modern',t:'Photoelectric effect',vh:170,
  intro:'Light ejects electrons only above a threshold frequency. Move the frequency slider past it.',
  P:[{k:'f',l:'Frequency f (THz)',a:300,b:1600,v:900,s:10},{k:'w',l:'Metal (work function, eV)',sel:[['Caesium 2.1',2.1],['Sodium 2.28',2.28],['Zinc 4.3',4.3],['Copper 4.65',4.65],['Platinum 5.65',5.65]],v:2.28},{k:'I',l:'Intensity (%)',a:5,b:100,v:50,s:5}],
@@ -216,15 +257,122 @@ const E=[
  pr:['Mount a semiconductor sample (for example germanium) in a heater with a thermometer.','Measure its resistance R at 10 K steps from room temperature to about 380 K.','Plot ln(1/R) against 1/T.','The slope equals −E_g/2k in the intrinsic region.','Calculate E_g and compare with the accepted value.']}
 ];
 
+const lin=(a,b,n)=>Array.from({length:n+1},(_,i)=>a+(b-a)*i/n),g0=9.81;
+const qz=L=>L.map((m,n)=>`<div class="q"><b>${n+1}. ${m[0]}</b>${m[1].map((o,i)=>`<button data-i="${i}">${o}</button>`).join('')}<p class="fb"></p></div>`).join('');
+E.push(
+{id:'malus',sec:'optics',t:'Malus’ law: polarized light',
+ intro:'Rotate the analyzer and watch the transmitted intensity follow cos²θ.',
+ P:[{k:'Iu',l:'Unpolarized intensity (lux)',a:200,b:4000,v:2000,s:100},{k:'th',l:'Analyzer angle θ (°)',a:0,b:360,v:30,s:5}],
+ run(p){const I0=p.Iu/2,c=t=>I0*Math.cos(t*Math.PI/180)**2,x=lin(0,360,180);
+  return{S:[{n:'I = I₀ cos²θ',x,y:x.map(c)}],xl:'analyzer angle θ (°)',yl:'intensity (lux)',z:1,pt:[p.th,c(p.th)],
+   info:`The polarizer leaves I₀ = Iu/2 = ${fx(I0)} lux. At θ = ${p.th}° the meter reads ${fx(c(p.th))} lux. Maxima at 0°, 180°, 360°; zeros at 90° and 270°.`}},
+ th:'<p>Unpolarized light of intensity Iu loses half its intensity in the polarizer: I₀ = Iu/2. A second sheet (the analyzer) at angle θ transmits only the field component along its axis, E₀cos θ. Intensity goes as amplitude squared, so I = I₀ cos²θ (Malus’ law).</p><p>I is maximum when the axes are parallel and zero when they are crossed.</p>',
+ pr:['Set both polarizing sheets to 0° using the index marks.','Switch on the source and aim it so the photometer is well lit.','Record the intensity with the analyzer at 0°.','Turn the analyzer in 10° steps and record the intensity each time.','Plot intensity against θ and note the angles of maximum and minimum.'],
+ mq:[['The direction of polarization of a light wave is the direction of its:',['propagation','magnetic field','opposite to propagation','electric field'],3,'Polarization is defined by the electric field vector.'],
+ ['The SI unit of light intensity is:',['watt','joule','W/m²','W/m'],2,'Intensity is power per unit area.'],
+ ['Unpolarized light of intensity Iu passes through a polarizing sheet. The transmitted intensity is:',['Iu','Iu/3','Iu/2','Iu/4'],2,'On average half the electric field energy is along the transmission axis.'],
+ ['Polarized light of intensity I₀ meets an analyzer at 60°. The transmitted intensity is:',['I₀/2','I₀/4','0.75 I₀','0'],1,'cos²60° = (0.5)² = 0.25.'],
+ ['At which analyzer angle (from parallel) is the transmitted intensity zero?',['0°','45°','90°','180°'],2,'Crossed axes: cos 90° = 0.']]},
+
+{id:'mixture',sec:'thermal',t:'Specific heat by the method of mixtures',
+ intro:'Drop a hot solid into cold water in a calorimeter. The final temperature depends on the solid’s specific heat.',
+ P:[{k:'cs',l:'Solid (c in cal/g·°C)',sel:[['Aluminium 0.22',.22],['Iron 0.11',.11],['Copper 0.092',.092],['Lead 0.031',.031]],v:.11},{k:'ms',l:'Mass of solid (g)',a:10,b:400,v:150,s:10},{k:'mw',l:'Mass of water (g)',a:50,b:300,v:150,s:10},{k:'mc',l:'Calorimeter mass (g)',a:20,b:100,v:50,s:5},{k:'Tw',l:'Cold water T (°C)',a:10,b:30,v:20,s:1},{k:'Ts',l:'Hot solid T (°C)',a:90,b:100,v:100,s:1}],
+ run(p){const C0=p.mw+.22*p.mc,Tf=m=>(m*p.cs*p.Ts+C0*p.Tw)/(m*p.cs+C0),x=lin(10,400,39),T=Tf(p.ms);
+  return{S:[{n:'final temperature',x,y:x.map(Tf)}],xl:'mass of solid (g)',yl:'T_f (°C)',pt:[p.ms,T],
+   info:`T_f = ${fx(T)} °C. Heat capacity of the solid C_s = m_s c_s = ${fx(p.ms*p.cs)} cal/°C. Solving the mixture equation gives c_s = ${fx(C0*(T-p.Tw)/(p.ms*(p.Ts-T)))} cal/g·°C.`}},
+ th:'<p>Heat lost by the hot solid equals heat gained by the water and calorimeter:</p><p>m<sub>s</sub>c<sub>s</sub>(T<sub>si</sub> − T<sub>f</sub>) = (m<sub>w</sub>c<sub>w</sub> + m<sub>c</sub>c<sub>c</sub>)(T<sub>f</sub> − T<sub>wi</sub>).</p><p>Heat capacity C = mc (cal/°C) and specific heat c has units cal/g·°C or J/kg·K. 1 cal = 4.2 J.</p>',
+ pr:['Weigh the solid (m_s) and heat it in boiling water.','Weigh the empty calorimeter (m_c), half fill it with cold water and weigh again to get m_w.','Measure the cold water temperature T_wi and the boiling temperature T_si.','Move the solid into the cold water, stir, and read the final temperature T_f.','Solve the equation for c_s, then find C = m_s c_s and the percentage error.'],
+ mq:[['A unit of specific heat is:',['J/K','cal/m·°C','cal/°C','J/kg·K'],3,'Specific heat is heat per unit mass per degree.'],
+ ['A unit of heat capacity is:',['cal/g·°C','cal/m·°C','cal/°C','J/kg'],2,'Heat capacity is heat per degree for the whole object.'],
+ ['One joule is about:',['4200 cal','2.38 cal','0.238 cal','4.2 cal'],2,'1 cal = 4.2 J, so 1 J = 0.238 cal.'],
+ ['Two samples of the same solid have masses 10 g and 1 kg. The ratio of their specific heats is:',['10:1','1:10','1:100','1:1'],3,'Specific heat depends on the material, not the mass.'],
+ ['For those same samples, the ratio of heat capacities (10 g : 1 kg) is:',['10:1','1:10','1:100','1:1'],2,'C = mc, so it scales with mass: 10 g : 1000 g = 1:100.'],
+ ['Heat has the same units as:',['temperature','work','energy/time','heat capacity'],1,'Heat is energy, measured in joules like work.']]},
+
+{id:'resonance',sec:'mechanics',t:'Resonance in an air column (speed of sound)',
+ intro:'A tube closed at one end resonates when its length is a quarter of the wavelength. Use L against 1/f to find the speed of sound.',
+ P:[{k:'f',l:'Frequency f (Hz)',a:300,b:1500,v:700,s:20},{k:'t',l:'Room temperature (°C)',a:0,b:40,v:25,s:1}],
+ run(p){const v=331.4+.6*p.t,f=lin(300,1500,60),lam=100*v/p.f;
+  return{S:[{n:'L₁ = (v/4)(1/f)',x:f.map(F=>1000/F),y:f.map(F=>100*v/(4*F))}],xl:'1/f (ms)',yl:'L₁ (cm)',pt:[1000/p.f,lam/4],
+   info:`v = ${fx(v)} m/s and λ = ${fx(lam)} cm. Resonances at L₁ = ${fx(lam/4)} cm, L₂ = ${fx(3*lam/4)} cm, L₃ = ${fx(5*lam/4)} cm. The slope of L against 1/f is v/4 = ${fx(v/4)} m/s.`}},
+ th:'<p>For any wave v = λf. In a tube closed at one end there is a node at the closed end and an antinode at the open end, so L = nλ/4 with n = 1, 3, 5… For the first resonance L₁ = λ/4 = (v/4)(1/f).</p><p>In air v = 331.4 + 0.6t (t in °C). A graph of L against 1/f is a straight line with slope v/4, so v = 4 × slope. In general v = √(B/ρ).</p>',
+ pr:['Record the room temperature and calculate v from v = 331.4 + 0.6t.','Set the function generator to a frequency such as 700 Hz.','Raise the tube until the first resonance is loudest and measure L₁ from the water surface to the tube end.','Repeat at higher frequencies (740, 780 … Hz).','Plot L against 1/f, find the slope, calculate v = 4 × slope, and compare with the theoretical value.'],
+ mq:[['The unit of the bulk modulus is:',['N/m','N/m²','N/m³','N'],1,'B is a pressure, so N/m².'],
+ ['The speed of sound in a medium is proportional to the:',['density','angular frequency','bulk modulus (through v = √(B/ρ))','wavelength'],2,'v = √(B/ρ), so it increases with B.'],
+ ['Sound travels in a material of density 10 kg/m³ compared with one of 40 kg/m³:',['four times faster','two times faster','four times slower','two times slower'],1,'v ∝ 1/√ρ. A 4× smaller density gives a 2× higher speed.'],
+ ['If the generator frequency is increased, the speed of sound:',['stays the same','decreases','increases','becomes zero'],0,'Speed depends on the medium. Wavelength shrinks instead.'],
+ ['With v ≈ 330 m/s and f = 660 Hz, the first resonance occurs at L ≈:',['50 cm','25 cm','12.5 cm','6.25 cm'],2,'L₁ = v/4f = 330/2640 = 0.125 m.'],
+ ['With v ≈ 330 m/s, two successive resonances are at 6.25 cm and 18.75 cm. The frequency is:',['2.64 kHz','1.32 kHz','660 Hz','1.98 kHz'],1,'The gap is λ/2 = 12.5 cm, so λ = 25 cm and f = 330/0.25 = 1320 Hz.']]},
+
+{id:'grating',sec:'optics',t:'Diffraction grating: measuring wavelength',
+ intro:'A grating splits laser light into sharp orders. Plot Yₙ against n and the slope gives the wavelength.',
+ P:[{k:'N',l:'Lines per mm (N)',a:100,b:1000,v:300,s:50},{k:'w',l:'Wavelength λ (nm)',a:400,b:750,v:633,s:5},{k:'D',l:'Grating to screen D (m)',a:.5,b:3,v:1.5,s:.1}],
+ run(p){const d=1000/p.N,ns=lin(-4,4,8).filter(n=>Math.abs(n)*p.w/1000<d);
+  if(ns.length<3)return{S:[{n:'central maximum only',x:[-1,0,1],y:[0,0,0]}],xl:'order n',yl:'Yₙ (mm)',info:'The wavelength is larger than the grating spacing, so only the central maximum appears.'};
+  const Y=(n,ex)=>{const s=n*p.w/1000/d;return ex?p.D*1000*s/Math.sqrt(1-s*s):p.D*1000*s};
+  return{S:[{n:'exact (tan θ)',x:ns,y:ns.map(n=>Y(n,1))},{n:'small angle: nDλ/d',x:ns,y:ns.map(n=>Y(n,0)),d:1}],xl:'order n',yl:'Yₙ (mm)',
+   info:`d = 1/N = ${fx(d)} µm. Highest order seen: n = ${Math.max(...ns)}. Slope Dλ/d = ${fx(p.D*p.w/d)} mm per order, so λ = slope × d/D = ${p.w} nm. First order at θ = ${fx(Math.asin(p.w/1000/d)*57.2958)}°.`}},
+ th:'<p>A grating with N lines per mm has spacing d = 1/N. All the waves add constructively when d sin θₙ = nλ. On a screen at distance D, Yₙ = nDλ/d for small angles, so a graph of Yₙ against n is a straight line with slope Dλ/d.</p><p>The wavelength is λ = slope × d/D. Orders only exist while nλ &lt; d.</p>',
+ pr:['Mount the laser, grating and screen with the grating normal to the beam.','Record the lines per mm (N) and calculate d = 1/N.','Measure the distance D from the grating to the screen.','Measure Yₙ for every visible order on both sides of the centre.','Plot Yₙ against n, take the slope, and calculate λ = slope × d/D.'],
+ mq:[['If light contains several wavelengths, which is diffracted the most by a grating?',['the shorter wavelength','the longer wavelength','all equally','none'],1,'sin θ = nλ/d, so a larger λ gives a larger angle.'],
+ ['The grating constant d of a grating with 300 lines/mm is:',['0.33 µm','3.33 µm','33.3 µm','300 µm'],1,'d = 1/N = 1/300 mm = 3.33 µm.'],
+ ['With d = 3.33 µm and λ = 633 nm, the highest visible order is:',['3','4','5','6'],2,'n < d/λ = 5.26, so n = 5.'],
+ ['A laser hits a grating with 5310 lines/cm. The first-order maximum is 0.488 m from the centre on a wall 1.72 m away. The wavelength is about:',['514 nm','534 nm','488 nm','633 nm'],0,'d = 1.883 µm and θ = tan⁻¹(0.488/1.72) ≈ 15.8°, so λ = d sin θ ≈ 514 nm. The small-angle formula gives 534 nm, which is less accurate here.']]},
+
+{id:'hooke',sec:'matter',t:'Hooke’s law and the spring constant',
+ intro:'Add masses and plot force against elongation. The slope is k, until you pass the elastic limit.',
+ P:[{k:'k',l:'Spring constant k (N/m)',a:5,b:200,v:40,s:1},{k:'m',l:'Mass added each step (g)',a:10,b:100,v:20,s:5},{k:'lim',l:'Elastic limit (N)',a:.5,b:5,v:.9,s:.1}],
+ run(p){const x=[],y=[],xi=[];for(let n=0;n<=7;n++){const F=n*p.m/1000*g0,e=F<=p.lim?F/p.k:p.lim/p.k+(F-p.lim)/(.3*p.k);x.push(e*100);y.push(F);xi.push(F/p.k*100)}
+  return{S:[{n:'measured',x,y},{n:'Hooke’s law (ideal)',x:xi,y,d:1}],xl:'elongation ΔL (cm)',yl:'force F (N)',z:1,
+   info:`Slope of the straight part = k = ${p.k} N/m. Seven loads reach ${fx(7*p.m/1000*g0)} N. Above the elastic limit (${p.lim} N) the spring stretches permanently and the line bends.`}},
+ th:'<p>Within the elastic limit the restoring force is proportional to the extension: F = −kΔL. The F against ΔL graph is a straight line whose slope is the spring constant k (N/m). A larger k means a stiffer spring.</p><p>Stress σ = F/A and strain ε = ΔL/L₀ are related by σ = Eε, where E is Young’s modulus.</p>',
+ pr:['Hang the spring with the mass hanger and pointer so the pointer touches 0 cm on the ruler.','Add a 20 g mass and record the mass in kg.','Read the pointer position. This is the elongation ΔL.','Calculate F = mg and repeat for at least 7 loads.','Plot F against ΔL and take the slope to find k.'],
+ mq:[['A spring stretches 0.25 m under a 20 N force. Its spring constant is:',['80 N/m','8 N/m','16 N/m','5 N/m'],0,'k = F/ΔL = 20/0.25 = 80 N/m.'],
+ ['A 6.0 N load lengthens a spring from 0.040 m to 0.13 m. Its stiffness is:',['55 N/m','67 N/m','80 N/m','70 N/m'],1,'k = 6.0/0.09 = 66.7 N/m.'],
+ ['A 10 kg object hangs from a spring with k = 23 N/m. The stretch is about:',['4.3 m','0.43 m','43 m','2.3 m'],0,'x = mg/k = 98.1/23 ≈ 4.3 m.'],
+ ['Within the elastic limit, if the stress increases, the ratio stress/strain:',['increases','decreases','stays the same','none of these'],2,'The ratio is Young’s modulus, a constant of the material.'],
+ ['A stretched spring returns to its original shape because of:',['gravity','friction','elasticity','air resistance'],2,'Elasticity is the property that restores the shape.']]},
+
+{id:'viscosity',sec:'matter',t:'Viscosity by a falling sphere (Stokes’ method)',
+ intro:'A steel sphere accelerates in the liquid until drag balances weight less buoyancy, giving a terminal velocity.',
+ P:[{k:'d',l:'Sphere diameter (mm)',a:2,b:10,v:5.9,s:.1},{k:'eta',l:'Viscosity η (Pa·s)',a:.1,b:2,v:1,s:.05}],
+ run(p){const r=p.d/2000,vt=2*g0*r*r*(7800-1260)/(9*p.eta),tau=2*r*r*7800/(9*p.eta),T=Math.max(5*tau,.05),x=lin(0,T,100);
+  return{S:[{n:'v(t)',x,y:x.map(t=>vt*(1-Math.exp(-t/tau)))},{n:'terminal velocity',x:[0,T],y:[vt,vt],d:1}],xl:'time (s)',yl:'speed (m/s)',z:1,
+   info:`v_t = ${fx(vt)} m/s, so the sphere covers L = 0.4 m in about ${fx(.4/vt)} s. It reaches v_t after roughly 5τ = ${fx(5*tau)} s. (ρ = 7800 kg/m³, σ = 1260 kg/m³.)`}},
+ th:'<p>A falling sphere feels weight W = ρVg, buoyancy F<sub>b</sub> = σVg and Stokes drag F<sub>S</sub> = 6πηrv. At terminal velocity the acceleration is zero, so</p><p>η = (2/9) g r² (ρ − σ)/v<sub>t</sub>, with v<sub>t</sub> = L/t.</p><p>The SI unit of η is Pa·s (kg m⁻¹ s⁻¹). Viscosity falls as temperature rises.</p>',
+ pr:['Measure the sphere diameter with a caliper.','Drop the sphere into the liquid column.','Time its fall over the terminal length L with a stopwatch.','Calculate v_t = L/t and then η from the equation.','Repeat with the other spheres and average η.'],
+ mq:[['Viscosity is:',['a fluid colour','a fluid temperature','a fluid’s resistance to flow','none of these'],2,'It is the internal friction between layers of fluid.'],
+ ['Fluids with very high viscosity flow:',['very slowly','very fast','not at all','none of these'],0,'High internal friction slows the flow.'],
+ ['The dimension of viscosity is:',['MLT²','ML⁻¹T','ML⁻¹T⁻¹','ML⁻²T'],2,'η = F/(A·dv/dy) gives kg m⁻¹ s⁻¹.'],
+ ['As the temperature of a liquid rises, its viscosity:',['increases','decreases','stays the same','becomes infinite'],1,'Warmer molecules overcome attraction more easily, so the liquid flows more freely.'],
+ ['1 kg m⁻¹ s⁻¹ is equal to:',['0.01 Pa·s','1 Pa·s','10 Pa·s','0.001 Pa·s'],1,'1 Pa·s = 1 N·s/m² = 1 kg m⁻¹ s⁻¹.'],
+ ['At terminal velocity the net force on the sphere is:',['upward','downward','zero','equal to the weight'],2,'Drag plus buoyancy balance the weight, so acceleration is zero.']]},
+
+{id:'tension',sec:'matter',t:'Surface tension by capillary rise',
+ intro:'Water rises in a narrow tube until the surface tension force balances the weight of the column.',
+ P:[{k:'r',l:'Tube radius r (mm)',a:.3,b:2,v:1,s:.05},{k:'ga',l:'Surface tension γ (N/m)',a:.04,b:.08,v:.072,s:.002}],
+ run(p){const fl=r=>2000*p.ga/(g0*r),h=r=>fl(r)-r/3,x=lin(.3,2,40),H=h(p.r);
+  return{S:[{n:'curved meniscus',x,y:x.map(h)},{n:'flat-surface formula',x,y:x.map(fl),d:1}],xl:'tube radius r (mm)',yl:'rise h (mm)',pt:[p.r,H],
+   info:`h = ${fx(H)} mm for r = ${p.r} mm. Narrow tubes raise water much higher. Check: γ = ½ρgr(h + r/3) = ${fx(.5*1000*g0*p.r/1000*(H/1000+p.r/3000))} N/m.`}},
+ th:'<p>Surface tension γ is the force per unit length (N/m) or the work per unit area (J/m²). In a capillary of radius r the liquid rises until the surface tension force γ(2πr) balances the weight of the raised column.</p><p>For a flat surface γ = ½ρgrh. For water the meniscus is curved, so γ = ½ρgr(h + r/3).</p>',
+ pr:['Fill a beaker with water.','Immerse the end of a capillary tube.','Measure the rise h above the water surface.','Calculate γ from the equation with ρ = 1000 kg/m³.','Repeat for the other tubes and average γ.'],
+ mq:[['Surface tension depends on:',['the two substances forming the surface','temperature','attraction between the liquid’s particles','all of them'],3,'All three affect it.'],
+ ['In a capillary tube the balance point is when:',['Fγ = Fc','Fc = Fg','Fγ = Fg','none of them'],2,'The surface tension force equals the weight of the raised column.'],
+ ['A unit of surface tension is:',['J/m²','N/m','kg/s²','all of them'],3,'1 J/m² = 1 N/m = 1 kg/s².'],
+ ['ρ = 1000 kg/m³, h = 1.5 cm and r = 1.5 × 10⁻³ m. The surface tension is about:',['1.56 N/m','0.113 N/m','0.43 N/m','none'],1,'γ = ½(1000)(9.81)(1.5×10⁻³)(0.015 + 0.0005) ≈ 0.114 N/m.'],
+ ['r = 1.75 × 10⁻³ m and γ = 0.125 N/m. The rise h is about:',['5.3 cm','1.39 cm','13.9 cm','none'],1,'h = 2γ/(ρgr) − r/3 ≈ 1.46 cm − 0.06 cm = 1.39 cm.'],
+ ['Compared with a wide tube, a narrower tube makes water rise:',['higher','lower','the same','not at all'],0,'h ∝ 1/r.']]}
+);
 E.forEach(e=>{
  const p=e.p={};e.P.forEach(q=>p[q.k]=q.v);
  const ctl=e.P.map(q=>q.sel?`<label>${q.l}<select data-k="${q.k}">${q.sel.map(o=>`<option value="${o[1]}"${o[1]==q.v?' selected':''}>${o[0]}</option>`).join('')}</select></label>`
   :`<label>${q.l}<output>${q.v}</output><input type="range" min="${q.a}" max="${q.b}" step="${q.s}" value="${q.v}" data-k="${q.k}"></label>`).join('');
  const el=e.el=document.createElement('article');el.className='exp';
- el.innerHTML=`<h3>${e.t}</h3><p class="mut">${e.intro}</p><div class="lab"><div class="ctl">${ctl}</div><div><canvas class="vw" width="640" height="${e.vh}"></canvas><canvas class="gr" width="640" height="300"></canvas><p class="info"></p></div></div>
- <details open><summary>Theory</summary>${e.th}</details><details><summary>Experimental procedure</summary><ol>${e.pr.map(s=>`<li>${s}</li>`).join('')}</ol></details>`;
+ el.innerHTML=`<h3>${e.t}</h3><p class="mut">${e.intro}</p><div class="lab"><div class="ctl">${ctl}</div><div>${e.vh?`<canvas class="vw" width="640" height="${e.vh}"></canvas>`:''}<canvas class="gr" width="640" height="300"></canvas><p class="info"></p></div></div>
+ <details open><summary>Theory</summary>${e.th}</details><details><summary>Experimental procedure</summary><ol>${e.pr.map(s=>`<li>${s}</li>`).join('')}</ol></details>${e.ex||''}${e.mq?`<details open><summary>Test yourself: multiple choice</summary>${qz(e.mq)}</details>`:''}`;
  el.addEventListener('input',ev=>{const i=ev.target,k=i.dataset.k;if(!k)return;p[k]=isNaN(+i.value)?i.value:+i.value;if(i.type=='range')i.previousElementSibling.textContent=i.value;upd(e)});
- $('#'+e.sec+' .slot').append(el);
+ $('#'+e.sec+' .slot').append(el);if(e.init)e.init(e);
+ if(e.mq)el.addEventListener('click',ev=>{const b=ev.target.closest('.q button');if(!b)return;const q=b.parentNode,m=e.mq[$$('.q',el).indexOf(q)],ok=+b.dataset.i==m[2];b.classList.add(ok?'ok':'bad');if(ok)$$('button',q).forEach(x=>x.disabled=true);$('.fb',q).textContent=ok?'Correct. '+m[3]:'Not quite. Try again.'});
  const card=document.createElement('a');card.className='card';card.href='#'+e.sec;card.style.cssText='text-decoration:none;color:inherit';
  card.innerHTML=`<h3>${e.t}</h3><p class="mut">${e.intro}</p>`;$('#hub').append(card);
 });
@@ -240,7 +388,7 @@ matchMedia('(prefers-color-scheme:dark)').addEventListener('change',()=>E.forEac
 const osc=$('#osc').getContext('2d');
 function loop(ms){
  const t=ms/1000;
- E.forEach(e=>{if(e.sec==cur){const c=$('.vw',e.el).getContext('2d');c.clearRect(0,0,640,e.vh);e.r.view(c,t)}});
+ E.forEach(e=>{if(e.sec==cur&&e.vh){const c=$('.vw',e.el).getContext('2d');c.clearRect(0,0,640,e.vh);e.r.view(c,t)}});
  if(cur=='home'){osc.clearRect(0,0,600,400);osc.strokeStyle=css('--acc');osc.lineWidth=2;osc.beginPath();
   for(let i=0;i<=600;i++){const s=i/600*6.283;const x=300+240*Math.sin(3*s+t*.6),y=200+150*Math.sin(2*s);i?osc.lineTo(x,y):osc.moveTo(x,y)}osc.stroke()}
  requestAnimationFrame(loop);
